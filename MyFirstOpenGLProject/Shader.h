@@ -1,12 +1,5 @@
-﻿#ifndef SHADER_H // same as pragma once? check this
-#define SHADER_H
-
-#include <glad/glad.h> // include glad to get all the required OpenGL headers
-  
+﻿#pragma once
 #include <string>
-#include <fstream>
-#include <sstream>
-#include <iostream>
 
 class Shader
 {
@@ -23,5 +16,3 @@ public:
 
 	void deleteShader();
 };
-
-#endif
