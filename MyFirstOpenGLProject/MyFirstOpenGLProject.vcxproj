@@ -148,11 +148,15 @@
   <ItemGroup>
     <Content Include="awesomeface.png" />
     <Content Include="container.jpg" />
+    <Content Include="lightShader.vs" />
     <Content Include="shader.vs" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="cubeLightFragment.fs" />
     <Compile Include="fragment00.fs" />
     <Compile Include="fragment01.fs" />
+    <Compile Include="fragmentLight.fs" />
+    <Compile Include="lightSourceFragment.fs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
