@@ -180,18 +180,18 @@ int main()
 	glBindVertexArray(0);
 	
 	
-	const Texture textureContainer(R"(E:\CppProjects\MyFirstOpenGLProject\MyFirstOpenGLProject\container.jpg)", 0, false);
-	const Texture textureAwesomeface(R"(E:\CppProjects\MyFirstOpenGLProject\MyFirstOpenGLProject\awesomeface.png)", 0, true);
+	const Texture textureContainer(R"(E:\CppProjects\MyFirstOpenGLProject\MyFirstOpenGLProject\container2.png)", 0, true);
+	const Texture textureContainerMetalBorder(R"(E:\CppProjects\MyFirstOpenGLProject\MyFirstOpenGLProject\container2_specular.png)", 0, true);
+	//const Texture textureAwesomeface(R"(E:\CppProjects\MyFirstOpenGLProject\MyFirstOpenGLProject\awesomeface.png)", 0, true);
 	
 	shader00.use();
-	shader00.setInt("ourTexture0", 0);
-	shader00.setInt("ourTexture1", 1);
-	shader00.setFloat("visibility", 0.2f);
+	shader00.setInt("material.diffuse", 0);
+	shader00.setInt("material.specular", 1);
+
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, textureContainer.GetId());
 	glActiveTexture(GL_TEXTURE1);
-	glBindTexture(GL_TEXTURE_2D, textureAwesomeface.GetId());
-
+	glBindTexture(GL_TEXTURE_2D, textureContainerMetalBorder.GetId());
 	glm::mat4 model = glm::mat4(1.0f);
 	glm::mat4 view = glm::mat4(1.0f);
 	glm::mat4 projection = glm::perspective(glm::radians(75.f), (800.f/600.f), 0.1f, 100.0f);
@@ -200,11 +200,11 @@ int main()
 	shader00.setMat4("view", view);
 	shader00.setMat4("projection", projection);
 
-	shader00.setVec3("objectColor", glm::vec3( 1.0f, 0.5f, 0.31f));
-	shader00.setVec3("lightColor", glm::vec3( 1.0f, 1.0f, 1.0f));
-
 	shader00.setVec3("lightPos", lightPos);
-	shader00.setVec3("viewPos", fpsCamera.Position);
+	shader00.setFloat("material.shininess", 32.0f);
+	shader00.setVec3("light.ambient",  glm::vec3(0.2f, 0.2f, 0.2f));
+	shader00.setVec3("light.diffuse",  glm::vec3(0.5f, 0.5f, 0.5f));
+	shader00.setVec3("light.specular", glm::vec3(1.0f, 1.0f, 1.0f)); 
 	
 	lightSourceShader.use();
 	lightSourceShader.setMat4("model", model);
@@ -213,7 +213,7 @@ int main()
 	
 
 	glm::vec3 cubePositions[] = {
-		glm::vec3( 0.0f,  0.0f,  -1.0f)//,
+		glm::vec3( 0.0f,  0.0f,  0.0f)//,
 		// glm::vec3( 2.0f,  5.0f, -15.0f), 
 		// glm::vec3(-1.5f, -2.2f, -2.5f),  
 		// glm::vec3(-3.8f, -2.0f, -12.3f),  
@@ -237,9 +237,9 @@ int main()
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
 
-	lightShader.use();
-	lightShader.setVec3("objectColor", glm::vec3( 1.0f, 0.5f, 0.31f));
-	lightShader.setVec3("lightColor", glm::vec3( 1.0f, 1.0f, 1.0f));
+	//lightShader.use();
+	//lightShader.setVec3("objectColor", glm::vec3( 1.0f, 0.5f, 0.31f));
+	//lightShader.setVec3("lightColor", glm::vec3( 1.0f, 1.0f, 1.0f));
 	
 	
 	float lastFrame = 0.0f; 
@@ -259,15 +259,16 @@ int main()
 		
 		shader00.use();
 		shader00.setMat4("view", view);
-
-
+		//shader00.setVec3("viewPos", fpsCamera.Position);
+		//shader00.setVec3("lightPos", glm::vec3(glm::sin(static_cast<float>(glfwGetTime())) * 2 * lightPos.x,(glm::sin(static_cast<float>(glfwGetTime()))/2) * lightPos.y,glm::cos(static_cast<float>(glfwGetTime())) * 2 * lightPos.z));
+		
 		glBindVertexArray(VAO);
 
 		for(auto cube : cubePositions)
 		{
 			model = glm::mat4(1.0f);
-			model = glm::translate(model, cube);
-			model = glm::rotate(model, static_cast<float>(glfwGetTime()), glm::vec3(1.0f, 0.5f, 0.0f));
+			model = glm::translate(model,  cube);
+			//model = glm::rotate(model, static_cast<float>(glfwGetTime()), glm::vec3(1.0f, 0.5f, 0.0f));
 			model = glm::scale(model, glm::vec3(1.0f));
 			shader00.setMat4("model", model);
 			glDrawArrays(GL_TRIANGLES, 0, 36);
@@ -278,6 +279,7 @@ int main()
 		lightSourceShader.use();
 		lightSourceShader.setMat4("view", view);
 		model = glm::mat4(1.0f);
+		//model = glm::translate(model, glm::vec3(glm::sin(static_cast<float>(glfwGetTime())) * 2 * lightPos.x,(glm::sin(static_cast<float>(glfwGetTime()))/2) * lightPos.y, glm::cos(static_cast<float>(glfwGetTime())) * 2 * lightPos.z));
 		model = glm::translate(model, lightPos);
 		model = glm::scale(model, glm::vec3(0.2f));
 		lightSourceShader.setMat4("model", model);

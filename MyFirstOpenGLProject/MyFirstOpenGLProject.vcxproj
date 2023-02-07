@@ -148,6 +148,8 @@
   <ItemGroup>
     <Content Include="awesomeface.png" />
     <Content Include="container.jpg" />
+    <Content Include="container2.png" />
+    <Content Include="container2_specular.png" />
     <Content Include="lightShader.vs" />
     <Content Include="shader.vs" />
   </ItemGroup>
