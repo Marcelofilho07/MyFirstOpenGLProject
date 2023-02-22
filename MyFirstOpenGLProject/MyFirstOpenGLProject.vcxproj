@@ -71,8 +71,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>E:\OpenGL\includes;$(IncludePath)</IncludePath>
-    <LibraryPath>E:\OpenGL\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>E:\CppProjects\MyFirstOpenGLProject\OpenGL\includes;$(IncludePath)</IncludePath>
+    <LibraryPath>E:\CppProjects\MyFirstOpenGLProject\OpenGL\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -112,7 +112,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>assimp-vc143-mt.lib;opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -146,11 +146,11 @@
     <ClInclude Include="Texture.h" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="awesomeface.png" />
-    <Content Include="container.jpg" />
-    <Content Include="container2.png" />
-    <Content Include="container2_specular.png" />
     <Content Include="lightShader.vs" />
+    <Content Include="resourcers\awesomeface.png" />
+    <Content Include="resourcers\container.jpg" />
+    <Content Include="resourcers\container2.png" />
+    <Content Include="resourcers\container2_specular.png" />
     <Content Include="shader.vs" />
   </ItemGroup>
   <ItemGroup>
